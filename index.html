@@ -58,7 +58,7 @@
             font-weight: bold;
         }
         input {
-            width: 90px;
+            width: 95px;
             padding: 6px;
             text-align: center;
             border: 1px solid #ccc;
@@ -92,7 +92,7 @@
 <body>
 
     <h2>📝 운정고 1학년 원점수 계산기</h2>
-    <div class="subtitle">수행평가는 배점(0~만점) 그대로, 중간/기말은 0~100점 기준으로 입력하세요.</div>
+    <div class="subtitle">모든 점수는 소수 첫째 자리(예: 95.5)까지 입력하여 계산할 수 있습니다.</div>
     
     <table>
         <thead>
@@ -108,19 +108,19 @@
                 <td class="subject-name" rowspan="2">공통국어1</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="korPerf" placeholder="0 ~ 40">
+                        <input type="number" id="korPerf" step="0.1" placeholder="0.0 ~ 40.0">
                         <span class="max-score">(40점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="korMid" placeholder="0 ~ 100">
+                        <input type="number" id="korMid" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="korFinal" placeholder="0 ~ 100">
+                        <input type="number" id="korFinal" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -136,19 +136,19 @@
                 <td class="subject-name" rowspan="2">공통수학1</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="mathPerf" placeholder="0 ~ 40">
+                        <input type="number" id="mathPerf" step="0.1" placeholder="0.0 ~ 40.0">
                         <span class="max-score">(40점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="mathMid" placeholder="0 ~ 100">
+                        <input type="number" id="mathMid" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="mathFinal" placeholder="0 ~ 100">
+                        <input type="number" id="mathFinal" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -164,19 +164,19 @@
                 <td class="subject-name" rowspan="2">공통영어1</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="engPerf" placeholder="0 ~ 50">
+                        <input type="number" id="engPerf" step="0.1" placeholder="0.0 ~ 50.0">
                         <span class="max-score">(50점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="engMid" placeholder="0 ~ 100">
+                        <input type="number" id="engMid" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="engFinal" placeholder="0 ~ 100">
+                        <input type="number" id="engFinal" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -192,19 +192,19 @@
                 <td class="subject-name" rowspan="2">한국사1</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="historyPerf" placeholder="0 ~ 50">
+                        <input type="number" id="historyPerf" step="0.1" placeholder="0.0 ~ 50.0">
                         <span class="max-score">(50점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="historyMid" placeholder="0 ~ 100">
+                        <input type="number" id="historyMid" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="historyFinal" placeholder="0 ~ 100">
+                        <input type="number" id="historyFinal" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -220,19 +220,19 @@
                 <td class="subject-name" rowspan="2">통합사회1</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="societyPerf" placeholder="0 ~ 60">
+                        <input type="number" id="societyPerf" step="0.1" placeholder="0.0 ~ 60.0">
                         <span class="max-score">(60점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="societyMid" placeholder="0 ~ 100">
+                        <input type="number" id="societyMid" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="societyFinal" placeholder="0 ~ 100">
+                        <input type="number" id="societyFinal" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -248,19 +248,19 @@
                 <td class="subject-name" rowspan="2">통합과학1</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="sciencePerf" placeholder="0 ~ 50">
+                        <input type="number" id="sciencePerf" step="0.1" placeholder="0.0 ~ 50.0">
                         <span class="max-score">(50점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="scienceMid" placeholder="0 ~ 100">
+                        <input type="number" id="scienceMid" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="scienceFinal" placeholder="0 ~ 100">
+                        <input type="number" id="scienceFinal" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -276,7 +276,7 @@
                 <td class="subject-name" rowspan="2">정보</td>
                 <td>
                     <div class="input-container">
-                        <input type="number" id="infoPerf" placeholder="0 ~ 100">
+                        <input type="number" id="infoPerf" step="0.1" placeholder="0.0 ~ 100.0">
                         <span class="max-score">(100점 만점)</span>
                     </div>
                 </td>
@@ -304,22 +304,17 @@
 
     <script>
         function calculate(subject, perfMax, midRatio, finalRatio) {
-            // 입력값 가져오기
             const perfScore = parseFloat(document.getElementById(subject + 'Perf').value) || 0;
             const midScore = parseFloat(document.getElementById(subject + 'Mid').value) || 0;
             const finalScore = parseFloat(document.getElementById(subject + 'Final').value) || 0;
 
-            // 수행평가는 획득한 점수가 곧 반영 점수 (예: 국어 수행 40점 만점에 35점 맞으면 35점 그대로 인정)
             const perfFinal = perfScore; 
-            
-            // 중간/기말고사는 (획득점수 / 100) * 학교반영비율
             const midFinal = midScore * (midRatio / 100);
             const finalFinal = finalScore * (finalRatio / 100);
 
-            // 최종 원점수 합산
             const total = perfFinal + midFinal + finalFinal;
 
-            // 결과 화면 출력
+            // 결과물도 소수 첫째 자리까지 깔끔하게 출력
             document.getElementById(subject + 'Result').innerText = "원점수: " + total.toFixed(1) + " 점";
         }
     </script>

@@ -23,7 +23,7 @@
         .notice-box {
             max-width: 700px;
             margin: 0 auto 15px auto;
-            padding: 12px 15px;
+            padding: 10px;
             background-color: #fff3cd;
             border: 1px solid #ffeeba;
             color: #856404;
@@ -31,7 +31,6 @@
             font-size: 0.9em;
             text-align: center;
             font-weight: bold;
-            line-height: 1.5;
         }
         table {
             width: 100%;
@@ -115,7 +114,7 @@
     
     <div class="notice-box">
         💡 학교 생활기록부용 최종 원점수는 소수 첫째 자리에서 반올림하여 (자연수) 나타냅니다.<br>
-        <span style="display:inline-block; margin-top:5px;">💡 석차 등급은 소수 셋째 자리에서 반올림하여 (최대 소수 두 자릿수)로 계산합니다.</span>
+        💡 석차 등급은 소수 셋째 자리에서 반올림하여 (최대 소수 두 자릿수)로 계산합니다.
     </div>
     
     <table>
@@ -336,12 +335,19 @@
             const midFinal = midScore * (midRatio / 100);
             const finalFinal = finalScore * (finalRatio / 100);
 
+            // 실제 총점 계산
             const total = perfFinal + midFinal + finalFinal;
 
+            // 1. 소수 셋째 자리에서 반올림하여 둘째 자리까지 만들기 (98.769 -> 98.77)
             const roundedTwoPlaces = Math.round(total * 100) / 100;
+            
+            // 2. 뒤에 불필요한 .0이나 .00을 지우기 위해 parseFloat 처리 (94.00 -> 94 / 92.50 -> 92.5)
             const finalDisplayScore = parseFloat(roundedTwoPlaces.toFixed(2));
+
+            // 3. 학교 성적표용 소수 첫째 자리 반올림 정수 값 계산 (92.5 -> 93)
             const schoolScore = Math.round(total);
 
+            // 결과 화면 출력
             document.getElementById(subject + 'Result').innerHTML = 
                 "원점수: <span style='color: #4A90E2; font-size: 1.15em;'>" + finalDisplayScore + " 점</span>" +
                 "<span class='rounded-info'>(최종 생기부 반영: " + schoolScore + "점)</span>";

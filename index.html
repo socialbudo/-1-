@@ -20,6 +20,18 @@
             font-size: 0.95em;
             margin-bottom: 25px;
         }
+        .notice-box {
+            max-width: 700px;
+            margin: 0 auto 15px auto;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 4px;
+            font-size: 0.9em;
+            text-align: center;
+            font-weight: bold;
+        }
         table {
             width: 100%;
             max-width: 700px;
@@ -87,12 +99,23 @@
             color: #d9534f;
             font-size: 1.05em;
         }
+        .rounded-info {
+            font-size: 0.85em;
+            color: #666;
+            font-weight: normal;
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body>
 
     <h2>📝 운정고 1학년 원점수 계산기</h2>
-    <div class="subtitle">모든 점수는 소수 첫째 자리(예: 95.5)까지 입력하여 계산할 수 있습니다.</div>
+    <div class="subtitle">나의 정확한 학기말 성적을 계산해 보세요.</div>
+    
+    <div class="notice-box">
+        💡 학교 생활기록부용 최종 원점수는 소수 첫째 자리에서 반올림하여 (자연수) 나타냅니다.
+        💡 석차 등급은 소수 셋째 자리에서 반올림하여 (최대 소수 두 자릿수)로 계산합니다.
+    </div>
     
     <table>
         <thead>
@@ -128,7 +151,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('kor', 40, 30, 30)">확인하기</button>
-                    <div class="result-area" id="korResult">원점수: ____ 점</div>
+                    <div class="result-area" id="korResult">원점수: ____</div>
                 </td>
             </tr>
 
@@ -156,7 +179,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('math', 40, 30, 30)">확인하기</button>
-                    <div class="result-area" id="mathResult">원점수: ____ 점</div>
+                    <div class="result-area" id="mathResult">원점수: ____</div>
                 </td>
             </tr>
 
@@ -184,7 +207,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('eng', 50, 25, 25)">확인하기</button>
-                    <div class="result-area" id="engResult">원점수: ____ 점</div>
+                    <div class="result-area" id="engResult">원점수: ____</div>
                 </td>
             </tr>
 
@@ -212,7 +235,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('history', 50, 25, 25)">확인하기</button>
-                    <div class="result-area" id="historyResult">원점수: ____ 점</div>
+                    <div class="result-area" id="historyResult">원점수: ____</div>
                 </td>
             </tr>
 
@@ -240,7 +263,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('society', 60, 20, 20)">확인하기</button>
-                    <div class="result-area" id="societyResult">원점수: ____ 점</div>
+                    <div class="result-area" id="societyResult">원점수: ____</div>
                 </td>
             </tr>
 
@@ -268,7 +291,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('science', 50, 25, 25)">확인하기</button>
-                    <div class="result-area" id="scienceResult">원점수: ____ 점</div>
+                    <div class="result-area" id="scienceResult">원점수: ____</div>
                 </td>
             </tr>
 
@@ -296,7 +319,7 @@
             <tr>
                 <td colspan="3">
                     <button onclick="calculate('info', 100, 0, 0)">확인하기</button>
-                    <div class="result-area" id="infoResult">원점수: ____ 점</div>
+                    <div class="result-area" id="infoResult">원점수: ____</div>
                 </td>
             </tr>
         </tbody>
@@ -312,10 +335,22 @@
             const midFinal = midScore * (midRatio / 100);
             const finalFinal = finalScore * (finalRatio / 100);
 
+            // 실제 총점 계산
             const total = perfFinal + midFinal + finalFinal;
 
-            // 결과물도 소수 첫째 자리까지 깔끔하게 출력
-            document.getElementById(subject + 'Result').innerText = "원점수: " + total.toFixed(1) + " 점";
+            // 1. 소수 셋째 자리에서 반올림하여 둘째 자리까지 만들기 (98.769 -> 98.77)
+            const roundedTwoPlaces = Math.round(total * 100) / 100;
+            
+            // 2. 뒤에 불필요한 .0이나 .00을 지우기 위해 parseFloat 처리 (94.00 -> 94 / 92.50 -> 92.5)
+            const finalDisplayScore = parseFloat(roundedTwoPlaces.toFixed(2));
+
+            // 3. 학교 성적표용 소수 첫째 자리 반올림 정수 값 계산 (92.5 -> 93)
+            const schoolScore = Math.round(total);
+
+            // 결과 화면에 정밀 점수와 생기부용 정수 점수를 동시에 보여줍니다.
+            document.getElementById(subject + 'Result').innerHTML = 
+                "원점수: <span style='color: #4A90E2; font-size: 1.15em;'>" + finalDisplayScore + " 점</span>" +
+                "<span class='rounded-info'>(최종 생기부 반영: " + schoolScore + "점)</span>";
         }
     </script>
 </body>

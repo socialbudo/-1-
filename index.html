@@ -1,357 +1,360 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>운정고 1학년 1학기 원점수 계산기</title>
-    <style>
-        body {
-            font-family: 'Malgun Gothic', sans-serif;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 0.95em;
-            margin-bottom: 25px;
-        }
-        .notice-box {
-            max-width: 700px;
-            margin: 0 auto 15px auto;
-            padding: 10px;
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            border-radius: 4px;
-            font-size: 0.9em;
-            text-align: center;
-            font-weight: bold;
-        }
-        table {
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid #e0e0e0;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #4A90E2;
-            color: white;
-            font-weight: bold;
-        }
-        .subject-name {
-            font-weight: bold;
-            background-color: #f7f9fc;
-            width: 22%;
-            color: #333;
-        }
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        .max-score {
-            font-size: 0.8em;
-            color: #ff6b6b;
-            font-weight: bold;
-        }
-        input {
-            width: 95px;
-            padding: 6px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input:disabled {
-            background-color: #eee;
-            color: #999;
-        }
-        button {
-            padding: 6px 16px;
-            background-color: #4A90E2;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background-color: #357ABD;
-        }
-        .result-area {
-            margin-top: 8px;
-            font-weight: bold;
-            color: #d9534f;
-            font-size: 1.05em;
-        }
-        .rounded-info {
-            font-size: 0.85em;
-            color: #666;
-            font-weight: normal;
-            margin-left: 8px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>운정고 1학년 1학기 원점수 계산기</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+        }
+        .notice-box {
+            max-width: 700px;
+            margin: 0 auto 15px auto;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 4px;
+            font-size: 0.9em;
+            text-align: center;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #4A90E2;
+            color: white;
+            font-weight: bold;
+        }
+        .subject-name {
+            font-weight: bold;
+            background-color: #f7f9fc;
+            width: 22%;
+            color: #333;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .max-score {
+            font-size: 0.8em;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        input {
+            width: 95px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input:disabled {
+            background-color: #eee;
+            color: #999;
+        }
+        button {
+            padding: 6px 16px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #357ABD;
+        }
+        .result-area {
+            margin-top: 8px;
+            font-weight: bold;
+            color: #d9534f;
+            font-size: 1.05em;
+        }
+        .rounded-info {
+            font-size: 0.85em;
+            color: #666;
+            font-weight: normal;
+            margin-left: 8px;
+        }
+    </style>
 </head>
 <body>
 
-    <h2>📝 운정고 1학년 원점수 계산기</h2>
-    <div class="subtitle">나의 정확한 학기말 성적을 계산해 보세요.</div>
-    
-    <div class="notice-box">
-        💡 학교 생활기록부용 최종 원점수는 소수 첫째 자리에서 반올림하여 (자연수) 나타냅니다.
-        💡 석차 등급은 소수 셋째 자리에서 반올림하여 (최대 소수 두 자릿수)로 계산합니다.
-    </div>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>과목</th>
-                <th>수행평가</th>
-                <th>중간고사</th>
-                <th>기말고사</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="subject-name" rowspan="2">공통국어1</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="korPerf" step="0.1" placeholder="0.0 ~ 40.0">
-                        <span class="max-score">(40점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="korMid" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="korFinal" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('kor', 40, 30, 30)">확인하기</button>
-                    <div class="result-area" id="korResult">원점수: ____</div>
-                </td>
-            </tr>
+    <h2>📝 운정고 1학년 원점수 계산기</h2>
+    <div class="subtitle">나의 정확한 학기말 성적을 계산해 보세요.</div>
+    
+    <div class="notice-box">
+        💡 학교 생활기록부용 최종 원점수는 소수 첫째 자리에서 반올림하여 (자연수) 나타냅니다.
+        💡 석차 등급은 소수 셋째 자리에서 반올림하여 (최대 소수 두 자릿수)로 계산합니다.
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>과목</th>
+                <th>수행평가</th>
+                <th>중간고사</th>
+                <th>기말고사</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="subject-name" rowspan="2">공통국어1</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="korPerf" step="0.1" placeholder="0.0 ~ 40.0">
+                        <span class="max-score">(40점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="korMid" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="korFinal" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('kor', 40, 30, 30)">확인하기</button>
+                    <div class="result-area" id="korResult">원점수: ____</div>
+                </td>
+            </tr>
 
-            <tr>
-                <td class="subject-name" rowspan="2">공통수학1</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="mathPerf" step="0.1" placeholder="0.0 ~ 40.0">
-                        <span class="max-score">(40점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="mathMid" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="mathFinal" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('math', 40, 30, 30)">확인하기</button>
-                    <div class="result-area" id="mathResult">원점수: ____</div>
-                </td>
-            </tr>
+            <tr>
+                <td class="subject-name" rowspan="2">공통수학1</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="mathPerf" step="0.1" placeholder="0.0 ~ 40.0">
+                        <span class="max-score">(40점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="mathMid" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="mathFinal" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('math', 40, 30, 30)">확인하기</button>
+                    <div class="result-area" id="mathResult">원점수: ____</div>
+                </td>
+            </tr>
 
-            <tr>
-                <td class="subject-name" rowspan="2">공통영어1</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="engPerf" step="0.1" placeholder="0.0 ~ 50.0">
-                        <span class="max-score">(50점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="engMid" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="engFinal" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('eng', 50, 25, 25)">확인하기</button>
-                    <div class="result-area" id="engResult">원점수: ____</div>
-                </td>
-            </tr>
+            <tr>
+                <td class="subject-name" rowspan="2">공통영어1</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="engPerf" step="0.1" placeholder="0.0 ~ 50.0">
+                        <span class="max-score">(50점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="engMid" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="engFinal" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('eng', 50, 25, 25)">확인하기</button>
+                    <div class="result-area" id="engResult">원점수: ____</div>
+                </td>
+            </tr>
 
-            <tr>
-                <td class="subject-name" rowspan="2">한국사1</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="historyPerf" step="0.1" placeholder="0.0 ~ 50.0">
-                        <span class="max-score">(50점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="historyMid" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="historyFinal" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('history', 50, 25, 25)">확인하기</button>
-                    <div class="result-area" id="historyResult">원점수: ____</div>
-                </td>
-            </tr>
+            <tr>
+                <td class="subject-name" rowspan="2">한국사1</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="historyPerf" step="0.1" placeholder="0.0 ~ 50.0">
+                        <span class="max-score">(50점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="historyMid" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="historyFinal" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('history', 50, 25, 25)">확인하기</button>
+                    <div class="result-area" id="historyResult">원점수: ____</div>
+                </td>
+            </tr>
 
-            <tr>
-                <td class="subject-name" rowspan="2">통합사회1</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="societyPerf" step="0.1" placeholder="0.0 ~ 60.0">
-                        <span class="max-score">(60점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="societyMid" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="societyFinal" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('society', 60, 20, 20)">확인하기</button>
-                    <div class="result-area" id="societyResult">원점수: ____</div>
-                </td>
-            </tr>
+            <tr>
+                <td class="subject-name" rowspan="2">통합사회1</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="societyPerf" step="0.1" placeholder="0.0 ~ 60.0">
+                        <span class="max-score">(60점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="societyMid" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="societyFinal" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('society', 60, 20, 20)">확인하기</button>
+                    <div class="result-area" id="societyResult">원점수: ____</div>
+                </td>
+            </tr>
 
-            <tr>
-                <td class="subject-name" rowspan="2">통합과학1</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="sciencePerf" step="0.1" placeholder="0.0 ~ 50.0">
-                        <span class="max-score">(50점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="scienceMid" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="scienceFinal" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('science', 50, 25, 25)">확인하기</button>
-                    <div class="result-area" id="scienceResult">원점수: ____</div>
-                </td>
-            </tr>
+            <tr>
+                <td class="subject-name" rowspan="2">통합과학1</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="sciencePerf" step="0.1" placeholder="0.0 ~ 50.0">
+                        <span class="max-score">(50점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="scienceMid" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="scienceFinal" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('science', 50, 25, 25)">확인하기</button>
+                    <div class="result-area" id="scienceResult">원점수: ____</div>
+                </td>
+            </tr>
 
-            <tr>
-                <td class="subject-name" rowspan="2">정보</td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="infoPerf" step="0.1" placeholder="0.0 ~ 100.0">
-                        <span class="max-score">(100점 만점)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="infoMid" disabled placeholder="-">
-                        <span class="max-score">(미실시)</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-container">
-                        <input type="number" id="infoFinal" disabled placeholder="-">
-                        <span class="max-score">(미실시)</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <button onclick="calculate('info', 100, 0, 0)">확인하기</button>
-                    <div class="result-area" id="infoResult">원점수: ____</div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            <tr>
+                <td class="subject-name" rowspan="2">정보</td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="infoPerf" step="0.1" placeholder="0.0 ~ 100.0">
+                        <span class="max-score">(100점 만점)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="infoMid" disabled placeholder="-">
+                        <span class="max-score">(미실시)</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-container">
+                        <input type="number" id="infoFinal" disabled placeholder="-">
+                        <span class="max-score">(미실시)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('info', 100, 0, 0)">확인하기</button>
+                    <div class="result-area" id="infoResult">원점수: ____</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-    <script>
-        function calculate(subject, perfMax, midRatio, finalRatio) {
-            const perfScore = parseFloat(document.getElementById(subject + 'Perf').value) || 0;
-            const midScore = parseFloat(document.getElementById(subject + 'Mid').value) || 0;
-            const finalScore = parseFloat(document.getElementById(subject + 'Final').value) || 0;
+    <script>
+        function calculate(subject, perfMax, midRatio, finalRatio) {
+            const perfScore = parseFloat(document.getElementById(subject + 'Perf').value) || 0;
+            const midScore = parseFloat(document.getElementById(subject + 'Mid').value) || 0;
+            const finalScore = parseFloat(document.getElementById(subject + 'Final').value) || 0;
 
-            const perfFinal = perfScore; 
-            const midFinal = midScore * (midRatio / 100);
-            const finalFinal = finalScore * (finalRatio / 100);
+            const perfFinal = perfScore; 
+            const midFinal = midScore * (midRatio / 100);
+            const finalFinal = finalScore * (finalRatio / 100);
 
-            // 실제 총점 계산
-            const total = perfFinal + midFinal + finalFinal;
+            // 실제 총점 계산
+            const total = perfFinal + midFinal + finalFinal;
 
-            // 1. 소수 셋째 자리에서 반올림하여 둘째 자리까지 만들기 (98.769 -> 98.77)
-            const roundedTwoPlaces = Math.round(total * 100) / 100;
-            
-            // 2. 뒤에 불필요한 .0이나 .00을 지우기 위해 parseFloat 처리 (94.00 -> 94 / 92.50 -> 92.5)
-            const finalDisplayScore = parseFloat(roundedTwoPlaces.toFixed(2));
+            // 1. 소수 셋째 자리에서 반올림하여 둘째 자리까지 만들기 (98.769 -> 98.77)
+            const roundedTwoPlaces = Math.round(total * 100) / 100;
+            
+            // 2. 뒤에 불필요한 .0이나 .00을 지우기 위해 parseFloat 처리 (94.00 -> 94 / 92.50 -> 92.5)
+            const finalDisplayScore = parseFloat(roundedTwoPlaces.toFixed(2));
 
-            // 3. 학교 성적표용 소수 첫째 자리 반올림 정수 값 계산 (92.5 -> 93)
-            const schoolScore = Math.round(total);
+            // 3. 학교 성적표용 소수 첫째 자리 반올림 정수 값 계산 (92.5 -> 93)
+            const schoolScore = Math.round(total);
 
-            // 결과 화면에 정밀 점수와 생기부용 정수 점수를 동시에 보여줍니다.
-            document.getElementById(subject + 'Result').innerHTML = 
-                "원점수: <span style='color: #4A90E2; font-size: 1.15em;'>" + finalDisplayScore + " 점</span>" +
-                "<span class='rounded-info'>(최종 생기부 반영: " + schoolScore + "점)</span>";
-        }
-    </script>
+            // 결과 화면에 정밀 점수와 생기부용 정수 점수를 동시에 보여줍니다.
+            document.getElementById(subject + 'Result').innerHTML = 
+                "원점수: <span style='color: #4A90E2; font-size: 1.15em;'>" + finalDisplayScore + " 점</span>" +
+                "<span class='rounded-info'>(최종 생기부 반영: " + schoolScore + "점)</span>";
+        }
+    </script>
 </body>
 </html>
+
+
+오류 없지?

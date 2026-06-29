@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>학기말 원점수 계산기</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+        }
+        table {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #4A90E2;
+            color: white;
+            font-weight: bold;
+        }
+        .subject-name {
+            font-weight: bold;
+            background-color: #f7f9fc;
+            width: 25%;
+            color: #333;
+        }
+        input {
+            width: 80%;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input:disabled {
+            background-color: #eee;
+            color: #999;
+        }
+        button {
+            padding: 6px 16px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #357ABD;
+        }
+        .result-area {
+            margin-top: 8px;
+            font-weight: bold;
+            color: #d9534f;
+            font-size: 1.05em;
+        }
+        .ratio-info {
+            font-size: 0.8em;
+            color: #888;
+            display: block;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>📝 내 학기말 원점수 계산기</h2>
+    <div class="subtitle">지정된 과목별 반영 비율에 맞춰 계산됩니다.</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>과목</th>
+                <th>수행</th>
+                <th>중간</th>
+                <th>기말</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="subject-name" rowspan="2">공통국어1<span class="ratio-info">(40:30:30)</span></td>
+                <td><input type="number" id="korPerf" placeholder="입력"></td>
+                <td><input type="number" id="korMid" placeholder="입력"></td>
+                <td><input type="number" id="korFinal" placeholder="입력"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('kor', 0.4, 0.3, 0.3)">확인하기</button>
+                    <div class="result-area" id="korResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="subject-name" rowspan="2">공통수학1<span class="ratio-info">(40:30:30)</span></td>
+                <td><input type="number" id="mathPerf" placeholder="입력"></td>
+                <td><input type="number" id="mathMid" placeholder="입력"></td>
+                <td><input type="number" id="mathFinal" placeholder="입력"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('math', 0.4, 0.3, 0.3)">확인하기</button>
+                    <div class="result-area" id="mathResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="subject-name" rowspan="2">공통영어1<span class="ratio-info">(50:25:25)</span></td>
+                <td><input type="number" id="engPerf" placeholder="입력"></td>
+                <td><input type="number" id="engMid" placeholder="입력"></td>
+                <td><input type="number" id="engFinal" placeholder="입력"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('eng', 0.5, 0.25, 0.25)">확인하기</button>
+                    <div class="result-area" id="engResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="subject-name" rowspan="2">한국사1<span class="ratio-info">(50:25:25)</span></td>
+                <td><input type="number" id="historyPerf" placeholder="입력"></td>
+                <td><input type="number" id="historyMid" placeholder="입력"></td>
+                <td><input type="number" id="historyFinal" placeholder="입력"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('history', 0.5, 0.25, 0.25)">확인하기</button>
+                    <div class="result-area" id="historyResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="subject-name" rowspan="2">통합사회1<span class="ratio-info">(60:20:20)</span></td>
+                <td><input type="number" id="societyPerf" placeholder="입력"></td>
+                <td><input type="number" id="societyMid" placeholder="입력"></td>
+                <td><input type="number" id="societyFinal" placeholder="입력"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('society', 0.6, 0.2, 0.2)">확인하기</button>
+                    <div class="result-area" id="societyResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="subject-name" rowspan="2">통합과학1<span class="ratio-info">(50:25:25)</span></td>
+                <td><input type="number" id="sciencePerf" placeholder="입력"></td>
+                <td><input type="number" id="scienceMid" placeholder="입력"></td>
+                <td><input type="number" id="scienceFinal" placeholder="입력"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('science', 0.5, 0.25, 0.25)">확인하기</button>
+                    <div class="result-area" id="scienceResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="subject-name" rowspan="2">정보<span class="ratio-info">(100:0:0)</span></td>
+                <td><input type="number" id="infoPerf" placeholder="입력"></td>
+                <td><input type="number" id="infoMid" disabled placeholder="-"></td>
+                <td><input type="number" id="infoFinal" disabled placeholder="-"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="calculate('info', 1.0, 0, 0)">확인하기</button>
+                    <div class="result-area" id="infoResult">원점수: ____ 점</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function calculate(subject, pRatio, mRatio, fRatio) {
+            // 입력값 가져오기 (비활성화된 칸은 자동으로 0 처리)
+            const perf = parseFloat(document.getElementById(subject + 'Perf').value) || 0;
+            const mid = parseFloat(document.getElementById(subject + 'Mid').value) || 0;
+            const final = parseFloat(document.getElementById(subject + 'Final').value) || 0;
+
+            // 넘겨받은 비율로 정확하게 원점수 계산
+            const total = (perf * pRatio) + (mid * mRatio) + (final * fRatio);
+
+            // 결과 출력 (소수점 첫째 자리까지 깔끔하게 반올림)
+            document.getElementById(subject + 'Result').innerText = "원점수: " + total.toFixed(1) + " 점";
+        }
+    </script>
+</body>
+</html>
